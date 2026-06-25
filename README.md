@@ -56,7 +56,7 @@ Search the codebase for these and replace with your real details:
 | What | Where |
 |---|---|
 | `YOUR NAME` / studio name | `Header.tsx`, `Footer.tsx`, `Seo.tsx` (`SITE_NAME`) |
-| `KaviBharathi@gmail.com` | `Footer.tsx`, `Contact.tsx`, `ContactForm.tsx` (`CONTACT_EMAIL`) |
+| `sivask3002@gmail.com` | `Footer.tsx`, `Contact.tsx`, `ContactForm.tsx` (`CONTACT_EMAIL`) |
 | WhatsApp number | `WhatsAppButton.tsx` and `Contact.tsx` (`WHATSAPP_NUMBER`) |
 | Instagram / Facebook URLs | `Footer.tsx`, `Contact.tsx` |
 | Studio address | `MapEmbed.tsx` (`MAPS_QUERY`) |

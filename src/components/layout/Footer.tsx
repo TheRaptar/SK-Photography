@@ -30,8 +30,8 @@ export default function Footer() {
           <p className="eyebrow mb-4">Connect</p>
           <ul className="space-y-2.5 text-sm text-ink-dim">
             <li>
-              <a href="mailto:KaviBharathi@gmail.com" className="inline-flex items-center gap-2 hover:text-ink transition-colors">
-                <Mail size={14} strokeWidth={1.5} /> KaviBharathi@gmail.com
+              <a href="mailto:sivask3002@gmail.com" className="inline-flex items-center gap-2 hover:text-ink transition-colors">
+                <Mail size={14} strokeWidth={1.5} /> sivask3002@gmail.com
               </a>
             </li>
             <li>

@@ -2,7 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Send } from 'lucide-react';
 
 const SESSION_TYPES = ['Wedding', 'Portrait', 'Event', 'Commercial', 'Other'];
-const CONTACT_EMAIL = 'KaviBharathi@gmail.com'; // TODO: replace with your real inquiry inbox
+const CONTACT_EMAIL = 'sivask3002@gmail.com'; // TODO: replace with your real inquiry inbox
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);

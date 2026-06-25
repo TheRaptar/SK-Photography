@@ -35,10 +35,10 @@ export default function Contact() {
               <MessageCircle size={17} strokeWidth={1.6} /> Message on WhatsApp
             </a>
             <a
-              href="mailto:KaviBharathi@gmail.com"
+              href="mailto:sivask3002@gmail.com"
               className="flex items-center gap-3 text-sm hover:text-accent transition-colors"
             >
-              <Mail size={17} strokeWidth={1.6} /> KaviBharathi@gmail.com
+              <Mail size={17} strokeWidth={1.6} /> sivask3002@gmail.com
             </a>
             <a
               href="https://www.instagram.com/sk03_photography"
