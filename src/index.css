@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* Enables `dark:` variants toggled by a .dark class on <html>, instead of OS preference */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #faf9f6;
+  --surface: #ffffff;
+  --surface-2: #f2f0eb;
+  --ink: #15140f;
+  --ink-dim: #6b6963;
+  --accent: #9c7a4e;
+  --accent-soft: #ddd0bb;
+  --accent-2: #f0d38a;
+  --line: rgba(21, 20, 15, 0.1);
+  --line-strong: rgba(21, 20, 15, 0.18);
+  --gold-glow: rgba(156, 122, 78, 0.35);
+}
+
+.dark {
+  --bg: #08080a;
+  --surface: #121014;
+  --surface-2: #19171b;
+  --ink: #f6f3ec;
+  --ink-dim: #a19c8f;
+  --accent: #d4af6a;
+  --accent-soft: #4a3d2a;
+  --accent-2: #f3dca0;
+  --line: rgba(244, 242, 236, 0.1);
+  --line-strong: rgba(244, 242, 236, 0.2);
+  --gold-glow: rgba(212, 175, 106, 0.28);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-2: var(--accent-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --font-display: 'Fraunces', ui-serif, serif;
+  --font-body: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ---------- Base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  transition: background-color 0.35s ease, color 0.35s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Reusable utility classes ---------- */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.hairline {
+  border-color: var(--line);
+}
+
+/* thin custom scrollbar for a refined feel */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 999px;
+}
+
+/* ---------- Premium gold accents ---------- */
+
+/* Gradient gold text — headlines, logo wordmark, prices */
+.text-gold-gradient {
+  background: linear-gradient(115deg, var(--accent-soft) 0%, var(--accent-2) 35%, var(--accent) 65%, var(--accent-2) 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gold-sheen 7s ease-in-out infinite;
+}
+
+@keyframes gold-sheen {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Primary CTA — solid gold gradient with a light sweep on hover */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  color: #15120c;
+  isolation: isolate;
+  box-shadow: 0 8px 30px -10px var(--gold-glow);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.55) 50%, transparent 80%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+  z-index: 1;
+}
+.btn-gold:hover::before {
+  transform: translateX(120%);
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px -8px var(--gold-glow);
+}
+
+/* Secondary / outline CTA with a gold-glow border on hover */
+.btn-outline-gold {
+  position: relative;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+}
+.btn-outline-gold:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 10px 30px -12px var(--gold-glow);
+  transform: translateY(-2px);
+}
+
+/* Elevated card with a soft gold glow ring on hover — pairs with TiltCard */
+.card-premium {
+  position: relative;
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.card-premium:hover {
+  box-shadow: 0 20px 60px -20px var(--gold-glow), 0 0 0 1px var(--line-strong);
+}
+
+/* Soft blurred gold orbs used as ambient background depth */
+.glow-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(80px);
+  background: radial-gradient(circle, var(--gold-glow), transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(2%, -3%) scale(1.06); }
+}
+.animate-float-slow {
+  animation: float-slow 12s ease-in-out infinite;
+}
+
+/* Fine hairline shimmer used under headings / dividers */
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.6;
+}

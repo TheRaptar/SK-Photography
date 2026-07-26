@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8E08E"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="80" fill="#111111"/>
+
+  <!-- Camera Body -->
+  <rect
+    x="90"
+    y="170"
+    width="332"
+    height="190"
+    rx="28"
+    fill="none"
+    stroke="url(#gold)"
+    stroke-width="14"/>
+
+  <!-- Camera Top -->
+  <path
+    d="M170 170
+       L210 120
+       H302
+       L342 170"
+    fill="none"
+    stroke="url(#gold)"
+    stroke-width="14"
+    stroke-linejoin="round"/>
+
+  <!-- Lens -->
+  <circle
+    cx="256"
+    cy="265"
+    r="82"
+    fill="none"
+    stroke="url(#gold)"
+    stroke-width="14"/>
+
+  <circle
+    cx="256"
+    cy="265"
+    r="58"
+    fill="none"
+    stroke="url(#gold)"
+    stroke-width="8"/>
+
+  <!-- Shutter Button -->
+  <rect
+    x="355"
+    y="192"
+    width="32"
+    height="12"
+    rx="6"
+    fill="url(#gold)"/>
+
+  <!-- Flash -->
+  <rect
+    x="120"
+    y="150"
+    width="42"
+    height="12"
+    rx="6"
+    fill="url(#gold)"/>
+
+  <!-- SK -->
+  <text
+    x="256"
+    y="283"
+    text-anchor="middle"
+    font-size="58"
+    font-family="Georgia, serif"
+    font-weight="700"
+    fill="url(#gold)">
+    SK
+  </text>
+</svg>
