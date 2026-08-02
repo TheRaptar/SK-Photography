@@ -4,6 +4,7 @@ import Seo from '../components/shared/Seo';
 import FilterBar from '../components/portfolio/FilterBar';
 import GalleryGrid from '../components/portfolio/GalleryGrid';
 import Lightbox from '../components/portfolio/Lightbox';
+import DragFilmstrip from '../components/portfolio/DragFilmstrip';
 import { photos, galleries } from '../data/content';
 import { CATEGORY_LABELS, type Category } from '../types';
 import PhotoMedia from '../components/shared/PhotoMedia';
@@ -71,16 +72,17 @@ export default function Portfolio() {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-10">
         <p className="eyebrow mb-5">Browse by session</p>
-        <div className="flex gap-4 overflow-x-auto pb-4 -mx-1 px-1 [scrollbar-width:thin]">
+        <DragFilmstrip>
           {galleries
             .filter((g) => active === 'all' || g.category === active)
             .map((gallery) => (
               <Link
                 key={gallery.id}
                 to={`/portfolio/${gallery.id}`}
-                className="group shrink-0 w-56 sm:w-64"
+                className="group shrink-0 w-56 sm:w-64 select-none"
+                draggable={false}
               >
-                <div className="aspect-[4/5] mb-3 overflow-hidden">
+                <div className="aspect-[4/5] mb-3 overflow-hidden pointer-events-none">
                   <div className="w-full h-full transition-transform duration-500 group-hover:scale-105">
                     <PhotoMedia src={gallery.cover} alt={gallery.title} />
                   </div>
@@ -91,7 +93,7 @@ export default function Portfolio() {
                 </p>
               </Link>
             ))}
-        </div>
+        </DragFilmstrip>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12">

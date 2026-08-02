@@ -50,8 +50,10 @@ function GalleryTile({ photo, i, onOpen }: { photo: Photo; i: number; onOpen: ()
             transition={{ duration: 0.9, delay: (i % 6) * 0.06 + 0.05, ease: [0.65, 0, 0.15, 1] }}
             className="absolute inset-0"
           >
-            <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover/tile:scale-[1.05]">
-              <PhotoMedia src={photo.src} alt={photo.alt} />
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute inset-0 ken-burns-idle group-hover/tile:[animation-play-state:paused]">
+                <PhotoMedia src={photo.src} alt={photo.alt} />
+              </div>
             </div>
           </motion.div>
 

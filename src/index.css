@@ -186,6 +186,24 @@ img {
   box-shadow: 0 20px 60px -20px var(--gold-glow), 0 0 0 1px var(--line-strong);
 }
 
+/* A quiet, continuous drift on resting photo tiles — the frame never
+   truly holds still, like a slide projector's slight settle. Paused on
+   hover so it doesn't fight with the tilt/hover treatments layered on
+   top, and disabled entirely for reduced motion. */
+@keyframes ken-burns-drift {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.045) translate(-0.6%, -0.4%); }
+  100% { transform: scale(1) translate(0, 0); }
+}
+.ken-burns-idle {
+  animation: ken-burns-drift 16s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ken-burns-idle {
+    animation: none;
+  }
+}
+
 /* Soft blurred gold orbs used as ambient background depth */
 .glow-orb {
   position: absolute;

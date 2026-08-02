@@ -51,8 +51,10 @@ export default function FeaturedCategories() {
                     to={`/portfolio?category=${item.category}`}
                     className="group block relative aspect-[4/5] overflow-hidden"
                   >
-                    <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
-                      <PhotoMedia src={item.image} alt={CATEGORY_LABELS[item.category]} />
+                    <div className="absolute inset-0 overflow-hidden">
+                      <div className="absolute inset-0 ken-burns-idle group-hover:[animation-play-state:paused]">
+                        <PhotoMedia src={item.image} alt={CATEGORY_LABELS[item.category]} />
+                      </div>
                     </div>
                     <div className="absolute inset-0 bg-black/15 group-hover:bg-black/5 transition-colors duration-500" />
                     <div className="absolute inset-x-0 bottom-0 p-6">

@@ -3,6 +3,8 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 import { Link } from 'react-router-dom';
 import { ArrowDown } from 'lucide-react';
 import PhotoMedia from '../shared/PhotoMedia';
+import ApertureMark from './ApertureMark';
+import Magnetic from '../shared/Magnetic';
 
 const BokehField = lazy(() => import('./BokehField'));
 
@@ -102,8 +104,9 @@ export default function Hero() {
           animate={reduceMotion ? undefined : 'show'}
           variants={fadeUp}
           custom={0}
-          className="eyebrow text-[#e7d9c2] mb-5"
+          className="eyebrow text-[#e7d9c2] mb-5 inline-flex items-center gap-2.5"
         >
+          <ApertureMark />
           Full-time photography studio — London &amp; beyond
         </motion.p>
 
@@ -150,12 +153,14 @@ export default function Hero() {
           custom={0.75}
           className="mt-10 flex items-center gap-6"
         >
-          <Link
-            to="/portfolio"
-            className="btn-gold inline-flex items-center text-[13px] tracking-[0.08em] uppercase px-7 py-3.5"
-          >
-            View portfolio
-          </Link>
+          <Magnetic>
+            <Link
+              to="/portfolio"
+              className="btn-gold inline-flex items-center text-[13px] tracking-[0.08em] uppercase px-7 py-3.5"
+            >
+              View portfolio
+            </Link>
+          </Magnetic>
           <Link
             to="/contact"
             className="inline-flex items-center text-[13px] tracking-[0.08em] uppercase text-white border-b border-white/40 pb-1 hover:border-accent hover:text-accent-2 transition-colors"
