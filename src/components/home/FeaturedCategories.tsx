@@ -37,7 +37,6 @@ export default function FeaturedCategories() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line">
           {FEATURED.map((item, i) => {
             const count = galleries.filter((g) => g.category === item.category).length;
-            const isFlagship = i === 0;
             return (
               <motion.div
                 key={item.category}
@@ -45,12 +44,12 @@ export default function FeaturedCategories() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className={`bg-bg ${isFlagship ? 'col-span-2' : ''}`}
+                className="bg-bg"
               >
                 <TiltCard maxTilt={4} className="card-premium">
                   <Link
                     to={`/portfolio?category=${item.category}`}
-                    className={`group block relative overflow-hidden ${isFlagship ? 'aspect-[16/10] sm:aspect-[2/1]' : 'aspect-[4/5]'}`}
+                    className="group block relative aspect-[4/5] overflow-hidden"
                   >
                     <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
                       <PhotoMedia src={item.image} alt={CATEGORY_LABELS[item.category]} />
