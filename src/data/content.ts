@@ -234,6 +234,11 @@ export const photos: Photo[] = [
   { id: 'national-wedding-show-01', title: 'Mini dress, full skirt', category: 'events', galleryId: 'national-wedding-show', src: '/photos/events/national-wedding-show-01.jpg', width: 1440, height: 1923, alt: 'Model on the runway in a short bridal dress at a wedding show' },
   { id: 'national-wedding-show-02', title: 'Floral and off-shoulder', category: 'events', galleryId: 'national-wedding-show', src: '/photos/events/national-wedding-show-02.jpg', width: 1440, height: 1916, alt: 'Model on the runway in a floral off-shoulder gown' },
   { id: 'national-wedding-show-03', title: 'One shoulder, full length', category: 'events', galleryId: 'national-wedding-show', src: '/photos/events/national-wedding-show-03.jpg', width: 1440, height: 1916, alt: 'Model on the runway in a one-shoulder bridal gown' },
+  { id: 'upload-1785650837482-0-7a0jtr', title: "The National wedding expo", category: 'events', galleryId: 'national-wedding-show', src: '/photos/events/upload-1785650837482-0-7a0jtr.jpg', width: 1170, height: 1560, alt: "@bella_sposa_bridal The National wedding expo London 2025 (4)" },
+  { id: 'upload-1785650837487-1-ypa9sv', title: "The National wedding expo", category: 'events', galleryId: 'national-wedding-show', src: '/photos/events/upload-1785650837487-1-ypa9sv.jpg', width: 1170, height: 1560, alt: "@bella_sposa_bridal The National wedding expo London 2025 (3)" },
+  { id: 'upload-1785650837496-2-f7hukk', title: "The National wedding expo", category: 'events', galleryId: 'national-wedding-show', src: '/photos/events/upload-1785650837496-2-f7hukk.jpg', width: 1170, height: 1560, alt: "@bella_sposa_bridal The National wedding expo London 2025 (2)" },
+  { id: 'upload-1785650837503-3-11q1gu', title: "The National wedding expo", category: 'events', galleryId: 'national-wedding-show', src: '/photos/events/upload-1785650837503-3-11q1gu.jpg', width: 1170, height: 1560, alt: "@bella_sposa_bridal The National wedding expo London 2025 (1)" },
+  { id: 'upload-1785650837509-4-7ej7w5', title: "The National wedding expo", category: 'events', galleryId: 'national-wedding-show', src: '/photos/events/upload-1785650837509-4-7ej7w5.jpg', width: 1170, height: 1560, alt: "@bella_sposa_bridal The National wedding expo London 2025" },
 ];
 
 
