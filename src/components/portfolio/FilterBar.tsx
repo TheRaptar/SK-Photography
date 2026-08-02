@@ -1,4 +1,5 @@
 import { Search } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { CATEGORY_LABELS, type Category } from '../../types';
 
 interface FilterBarProps {
@@ -12,6 +13,7 @@ const CATEGORIES: (Category | 'all')[] = [
   'all',
   'weddings',
   'portraits',
+  'fashion',
   'events',
   'street',
   'landscape',
@@ -28,13 +30,18 @@ export default function FilterBar({ active, onChange, search, onSearchChange }: 
               type="button"
               onClick={() => onChange(cat)}
               aria-pressed={active === cat}
-              className={`text-[12px] tracking-[0.06em] uppercase px-4 py-2 border transition-colors ${
-                active === cat
-                  ? 'bg-ink text-bg border-ink'
-                  : 'border-line text-ink-dim hover:text-ink hover:border-line-strong'
+              className={`relative text-[12px] tracking-[0.06em] uppercase px-4 py-2 border transition-colors ${
+                active === cat ? 'text-bg border-ink' : 'border-line text-ink-dim hover:text-ink hover:border-line-strong'
               }`}
             >
-              {cat === 'all' ? 'All work' : CATEGORY_LABELS[cat]}
+              {active === cat && (
+                <motion.span
+                  layoutId="filter-pill"
+                  transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                  className="absolute inset-0 bg-ink"
+                />
+              )}
+              <span className="relative">{cat === 'all' ? 'All work' : CATEGORY_LABELS[cat]}</span>
             </button>
           ))}
         </div>

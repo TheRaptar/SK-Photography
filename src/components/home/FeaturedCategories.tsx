@@ -9,6 +9,7 @@ import TiltCard from '../shared/TiltCard';
 const FEATURED: { category: Category; image: string }[] = [
   { category: 'weddings', image: '/photos/weddings/sikh-wedding-ceremony-01.jpg' },
   { category: 'portraits', image: '/photos/portraits/tower-bridge-sessions-04.jpg' },
+  { category: 'fashion', image: '/photos/portraits/city-style-pink-blazer-03.jpg' },
   { category: 'street', image: '/photos/street/character-studies-01.jpg' },
   { category: 'landscape', image: '/photos/landscape/seven-sisters-coast-03.jpg' },
   { category: 'events', image: '/photos/events/national-wedding-show-01.jpg' },
@@ -22,7 +23,7 @@ export default function FeaturedCategories() {
           <div>
             <p className="eyebrow mb-4">The work</p>
             <h2 className="font-display text-[clamp(1.8rem,3.6vw,3rem)] text-balance">
-              Five disciplines, one standard.
+              Six disciplines, one standard.
             </h2>
           </div>
           <Link
@@ -36,6 +37,7 @@ export default function FeaturedCategories() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line">
           {FEATURED.map((item, i) => {
             const count = galleries.filter((g) => g.category === item.category).length;
+            const isFlagship = i === 0;
             return (
               <motion.div
                 key={item.category}
@@ -43,12 +45,12 @@ export default function FeaturedCategories() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="bg-bg"
+                className={`bg-bg ${isFlagship ? 'col-span-2' : ''}`}
               >
                 <TiltCard maxTilt={4} className="card-premium">
                   <Link
                     to={`/portfolio?category=${item.category}`}
-                    className="group block relative aspect-[4/5] overflow-hidden"
+                    className={`group block relative overflow-hidden ${isFlagship ? 'aspect-[16/10] sm:aspect-[2/1]' : 'aspect-[4/5]'}`}
                   >
                     <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
                       <PhotoMedia src={item.image} alt={CATEGORY_LABELS[item.category]} />

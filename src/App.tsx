@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './context/ThemeContext';
 import Layout from './components/layout/Layout';
@@ -61,30 +61,32 @@ export default function App() {
   return (
     <HelmetProvider>
       <ThemeProvider>
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path={HIDDEN_ADMIN_PATH} element={<StudioAdmin />} />
-            <Route
-              path="*"
-              element={
-                <Layout>
-                  <PageTransition>
-                    <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="/portfolio" element={<Portfolio />} />
-                      <Route path="/portfolio/:galleryId" element={<GalleryDetail />} />
-                      <Route path="/about" element={<About />} />
-                      <Route path="/services" element={<Services />} />
-                      <Route path="/contact" element={<Contact />} />
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
-                  </PageTransition>
-                </Layout>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
+        <MotionConfig reducedMotion="user">
+          <BrowserRouter>
+            <ScrollToTop />
+            <Routes>
+              <Route path={HIDDEN_ADMIN_PATH} element={<StudioAdmin />} />
+              <Route
+                path="*"
+                element={
+                  <Layout>
+                    <PageTransition>
+                      <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/portfolio" element={<Portfolio />} />
+                        <Route path="/portfolio/:galleryId" element={<GalleryDetail />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/services" element={<Services />} />
+                        <Route path="/contact" element={<Contact />} />
+                        <Route path="*" element={<NotFound />} />
+                      </Routes>
+                    </PageTransition>
+                  </Layout>
+                }
+              />
+            </Routes>
+          </BrowserRouter>
+        </MotionConfig>
       </ThemeProvider>
     </HelmetProvider>
   );

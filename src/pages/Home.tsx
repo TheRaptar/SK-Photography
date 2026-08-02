@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <Seo
         title="Home"
-        description="Full-time photography studio based in London, shooting weddings, portraits, events, landscape, and street photography across the UK."
+        description="Full-time photography studio based in London, shooting weddings, portraits, fashion, events, landscape, and street photography across the UK."
         path="/"
       />
       <Hero />

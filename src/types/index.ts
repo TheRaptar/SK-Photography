@@ -3,7 +3,8 @@ export type Category =
   | 'portraits'
   | 'events'
   | 'street'
-  | 'landscape';
+  | 'landscape'
+  | 'fashion';
 
 export interface Photo {
   id: string;
@@ -57,4 +58,5 @@ export const CATEGORY_LABELS: Record<Category, string> = {
   events: 'Events',
   street: 'Street',
   landscape: 'Landscape',
+  fashion: 'Fashion',
 };

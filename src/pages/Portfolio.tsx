@@ -51,7 +51,7 @@ export default function Portfolio() {
     <>
       <Seo
         title="Portfolio"
-        description="Browse the full portfolio across weddings, portraits, events, street, and landscape photography."
+        description="Browse the full portfolio across weddings, portraits, fashion, events, street, and landscape photography."
         path="/portfolio"
       />
 

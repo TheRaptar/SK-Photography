@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import Seo from '../components/shared/Seo';
+import PhotoMedia from '../components/shared/PhotoMedia';
 
 // TODO: replace with your real milestones — these are placeholders only,
 // not verified claims, since fabricated awards/stats shouldn't ship on a
@@ -46,7 +47,19 @@ export default function About() {
             </h1>
           </div>
           <div className="lg:col-span-5">
-            <div className="aspect-[4/5] w-full max-w-sm ml-auto" style={{ background: 'linear-gradient(160deg,#b08968,#19140f)' }} />
+            <motion.div
+              initial={{ opacity: 0, scale: 1.04 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="aspect-[4/5] w-full max-w-sm ml-auto overflow-hidden"
+            >
+              <PhotoMedia
+                src="/photos/portraits/golden-hour-hyde-park-03.jpg"
+                alt="Golden hour portrait session in Hyde Park"
+                loading="eager"
+              />
+            </motion.div>
           </div>
         </div>
       </section>

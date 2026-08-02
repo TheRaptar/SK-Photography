@@ -45,6 +45,7 @@ import { CATEGORY_LABELS, type Category } from '../types';
 const CATEGORY_OPTIONS: Category[] = [
   'weddings',
   'portraits',
+  'fashion',
   'events',
   'street',
   'landscape',
