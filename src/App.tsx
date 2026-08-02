@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './context/ThemeContext';
 import Layout from './components/layout/Layout';
@@ -18,6 +19,29 @@ function ScrollToTop() {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
   }, [pathname]);
   return null;
+}
+
+const reduceMotion =
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/** A quiet fade + rise between pages — long enough to register as a
+ * transition, short enough to never feel like it's in the way. */
+function PageTransition({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  if (reduceMotion) return <>{children}</>;
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -6 }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
+  );
 }
 
 /**
@@ -45,15 +69,17 @@ export default function App() {
               path="*"
               element={
                 <Layout>
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/portfolio" element={<Portfolio />} />
-                    <Route path="/portfolio/:galleryId" element={<GalleryDetail />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/services" element={<Services />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
+                  <PageTransition>
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/portfolio" element={<Portfolio />} />
+                      <Route path="/portfolio/:galleryId" element={<GalleryDetail />} />
+                      <Route path="/about" element={<About />} />
+                      <Route path="/services" element={<Services />} />
+                      <Route path="/contact" element={<Contact />} />
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </PageTransition>
                 </Layout>
               }
             />
