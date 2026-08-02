@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Lock,
@@ -11,6 +11,11 @@ import {
   Check,
   ImageOff,
   ShieldAlert,
+  FolderOpen,
+  FolderCheck,
+  FolderX,
+  UploadCloud,
+  Loader2,
 } from 'lucide-react';
 import {
   isAdminSessionActive,
@@ -26,6 +31,13 @@ import {
   clearAllUploadedPhotos,
   readImageDimensions,
 } from '../lib/photoStore';
+import {
+  isFsAccessSupported,
+  chooseProjectRoot,
+  getRememberedProjectRoot,
+  forgetProjectRoot,
+  publishPhotosToSource,
+} from '../lib/fsPublish';
 import { useUploadedPhotos } from '../hooks/useUploadedPhotos';
 import { galleries } from '../data/content';
 import { CATEGORY_LABELS, type Category } from '../types';
@@ -125,6 +137,62 @@ function ManagerPanel() {
   const [copied, setCopied] = useState(false);
   const [busy, setBusy] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Direct-to-source publishing via the File System Access API — see
+  // src/lib/fsPublish.ts for how (and why) this works with no server.
+  const fsSupported = useMemo(() => isFsAccessSupported(), []);
+  const [projectRoot, setProjectRoot] = useState<FileSystemDirectoryHandle | null>(null);
+  const [connecting, setConnecting] = useState(false);
+  const [publishing, setPublishing] = useState(false);
+  const [publishError, setPublishError] = useState<string | null>(null);
+  const [publishNotice, setPublishNotice] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!fsSupported) return;
+    getRememberedProjectRoot().then((handle) => setProjectRoot(handle));
+  }, [fsSupported]);
+
+  const handleConnectFolder = async () => {
+    setPublishError(null);
+    setConnecting(true);
+    try {
+      const handle = await chooseProjectRoot();
+      setProjectRoot(handle);
+    } catch (err) {
+      if (err instanceof Error && err.name !== 'AbortError') setPublishError(err.message);
+    } finally {
+      setConnecting(false);
+    }
+  };
+
+  const handleDisconnectFolder = async () => {
+    await forgetProjectRoot();
+    setProjectRoot(null);
+    setPublishNotice(null);
+    setPublishError(null);
+  };
+
+  const handlePublish = async () => {
+    if (!projectRoot || uploadedPhotos.length === 0) return;
+    setPublishing(true);
+    setPublishError(null);
+    setPublishNotice(null);
+    try {
+      const { written, skippedExisting } = await publishPhotosToSource(projectRoot, uploadedPhotos);
+      for (const { photo } of written) {
+        await deleteUploadedPhoto(photo.id);
+      }
+      await refresh();
+      const parts: string[] = [];
+      if (written.length) parts.push(`${written.length} photo${written.length === 1 ? '' : 's'} written to public/photos/ and added to content.ts`);
+      if (skippedExisting.length) parts.push(`${skippedExisting.length} skipped (filename already exists — kept staged so you can rename and retry)`);
+      setPublishNotice(parts.join(' · ') || 'Nothing to publish.');
+    } catch (err) {
+      setPublishError(err instanceof Error ? err.message : 'Publish failed.');
+    } finally {
+      setPublishing(false);
+    }
+  };
 
   const galleryOptions = useMemo(
     () => [{ id: 'unassigned', title: 'Unassigned (category only)' }, ...galleries.map((g) => ({ id: g.id, title: g.title }))],
@@ -259,16 +327,80 @@ function ManagerPanel() {
           </button>
         </div>
 
-        <div className="flex items-start gap-3 bg-accent-soft/40 border border-accent/30 rounded-lg p-4 mb-8 text-sm text-ink-dim">
+        <div className="flex items-start gap-3 bg-accent-soft/40 border border-accent/30 rounded-lg p-4 mb-5 text-sm text-ink-dim">
           <ShieldAlert size={18} strokeWidth={1.5} className="text-accent shrink-0 mt-0.5" />
           <p>
-            These images are stored only in <strong className="text-ink">this browser</strong> (IndexedDB) —
-            it's a private staging area for you, not a live upload for site visitors, since this is a
-            static site with no backend. Use <strong className="text-ink">Export images</strong> and{' '}
-            <strong className="text-ink">Copy data snippet</strong> below, drop the files into{' '}
-            <code className="text-ink">/public/photos/&lt;category&gt;/</code>, paste the snippet into{' '}
-            <code className="text-ink">src/data/content.ts</code>, and redeploy to publish them for real.
+            Uploads land as Blobs in <strong className="text-ink">this browser's</strong> IndexedDB first — a
+            private staging area, since this is a static site with no backend. From here you can either{' '}
+            <strong className="text-ink">publish straight to your local project files</strong> below (no server,
+            just direct filesystem writes), or fall back to <strong className="text-ink">Export images</strong> +{' '}
+            <strong className="text-ink">Copy data snippet</strong> and do it by hand.
           </p>
+        </div>
+
+        {/* Direct-to-source publish panel */}
+        <div className="border border-line-strong rounded-lg p-5 mb-8">
+          {!fsSupported ? (
+            <div className="flex items-start gap-3 text-sm text-ink-dim">
+              <FolderX size={18} strokeWidth={1.5} className="shrink-0 mt-0.5" />
+              <p>
+                Direct-to-source publishing needs the File System Access API, which this browser doesn't support.
+                Use Chrome, Edge, or another Chromium browser for this — otherwise use{' '}
+                <strong className="text-ink">Export images</strong> + <strong className="text-ink">Copy data snippet</strong> below.
+              </p>
+            </div>
+          ) : !projectRoot ? (
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-start gap-3 text-sm text-ink-dim max-w-xl">
+                <FolderOpen size={18} strokeWidth={1.5} className="shrink-0 mt-0.5" />
+                <p>
+                  Connect your local project folder once — the browser will write image files and update{' '}
+                  <code className="text-ink">src/data/content.ts</code> directly, no download/move/paste needed.
+                  You still review and commit the changes yourself.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={handleConnectFolder}
+                disabled={connecting}
+                className="btn-gold inline-flex items-center gap-2 text-[12px] tracking-[0.08em] uppercase px-5 py-3 whitespace-nowrap disabled:opacity-50"
+              >
+                {connecting ? <Loader2 size={14} className="animate-spin" /> : <FolderOpen size={14} strokeWidth={1.8} />}
+                {connecting ? 'Waiting for folder…' : 'Connect project folder'}
+              </button>
+            </div>
+          ) : (
+            <div>
+              <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+                <div className="flex items-center gap-2 text-sm text-ink">
+                  <FolderCheck size={18} strokeWidth={1.5} className="text-accent shrink-0" />
+                  Connected to <code className="text-ink font-medium">{projectRoot.name}/</code>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleDisconnectFolder}
+                  className="text-[11px] tracking-[0.06em] uppercase text-ink-dim hover:text-ink underline underline-offset-2"
+                >
+                  Disconnect
+                </button>
+              </div>
+              <button
+                type="button"
+                onClick={handlePublish}
+                disabled={publishing || uploadedPhotos.length === 0}
+                className="btn-gold inline-flex items-center gap-2 text-[12px] tracking-[0.08em] uppercase px-5 py-3 disabled:opacity-40"
+              >
+                {publishing ? <Loader2 size={14} className="animate-spin" /> : <UploadCloud size={14} strokeWidth={1.8} />}
+                {publishing
+                  ? 'Writing files…'
+                  : uploadedPhotos.length === 0
+                    ? 'No staged photos to publish'
+                    : `Publish ${uploadedPhotos.length} photo${uploadedPhotos.length === 1 ? '' : 's'} to source`}
+              </button>
+            </div>
+          )}
+          {publishNotice && <p className="mt-3 text-sm text-accent">{publishNotice}</p>}
+          {publishError && <p className="mt-3 text-sm text-red-500">{publishError}</p>}
         </div>
 
         {/* Dropzone */}

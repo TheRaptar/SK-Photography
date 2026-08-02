@@ -31,7 +31,11 @@ export interface UploadedPhoto {
 
 const DB_NAME = 'sk-studio-admin';
 const STORE_NAME = 'uploaded-photos';
-const DB_VERSION = 1;
+const HANDLE_STORE_NAME = 'project-handle';
+const HANDLE_KEY = 'root';
+/* v2 adds the project-handle store used to remember the local folder
+   granted for direct-to-source publishing (see lib/fsPublish.ts). */
+const DB_VERSION = 2;
 
 function openDB(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
@@ -41,9 +45,43 @@ function openDB(): Promise<IDBDatabase> {
       if (!db.objectStoreNames.contains(STORE_NAME)) {
         db.createObjectStore(STORE_NAME, { keyPath: 'id' });
       }
+      if (!db.objectStoreNames.contains(HANDLE_STORE_NAME)) {
+        db.createObjectStore(HANDLE_STORE_NAME);
+      }
     };
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
+  });
+}
+
+/** Persists the user-granted project root folder handle across sessions. */
+export async function saveProjectDirectoryHandle(handle: FileSystemDirectoryHandle): Promise<void> {
+  const db = await openDB();
+  await new Promise<void>((resolve, reject) => {
+    const tx = db.transaction(HANDLE_STORE_NAME, 'readwrite');
+    tx.objectStore(HANDLE_STORE_NAME).put(handle, HANDLE_KEY);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+export async function getProjectDirectoryHandle(): Promise<FileSystemDirectoryHandle | null> {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(HANDLE_STORE_NAME, 'readonly');
+    const req = tx.objectStore(HANDLE_STORE_NAME).get(HANDLE_KEY);
+    req.onsuccess = () => resolve(req.result ?? null);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+export async function clearProjectDirectoryHandle(): Promise<void> {
+  const db = await openDB();
+  await new Promise<void>((resolve, reject) => {
+    const tx = db.transaction(HANDLE_STORE_NAME, 'readwrite');
+    tx.objectStore(HANDLE_STORE_NAME).delete(HANDLE_KEY);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
   });
 }
 

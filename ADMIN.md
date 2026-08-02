@@ -31,7 +31,30 @@ Portfolio/Gallery pages. But — important — **visitors to your live site will
 not see them**, because a static site has no server to store files that
 everyone can read. This is expected behavior, not a bug.
 
-To actually publish new photos:
+### Publishing them for real — two ways
+
+**Option A — Direct-to-source (Chrome/Edge/Opera, local dev only)**
+
+The panel can write straight into your own working copy of this repo using
+the browser's File System Access API — no server, no upload endpoint, just
+the browser writing files to a folder you grant it access to:
+
+1. Run the site locally (`npm run dev`) and open the hidden admin panel in a
+   Chromium-based browser.
+2. Upload/arrange your images as usual.
+3. Click **Connect project folder** and pick the top-level project folder
+   (the one containing `src/` and `public/`). It's remembered for next time.
+4. Click **Publish N photos to source** — this writes each image into
+   `public/photos/<category>/` and appends the matching entry to the
+   `photos` array in `src/data/content.ts`, exactly like doing it by hand.
+5. The change is now a normal, real edit in your working tree. Review it,
+   `git add`, commit, and push/deploy as usual — nothing is committed for
+   you automatically.
+
+Not supported in Firefox or Safari (they don't implement this API yet) —
+use Option B there.
+
+**Option B — Export + paste (works everywhere)**
 
 1. Open the hidden panel and upload/arrange your images as usual.
 2. Click **Export images** — this downloads each photo file.
@@ -41,6 +64,9 @@ To actually publish new photos:
    matching the filenames referenced in the copied snippet.
 5. Paste the snippet into the `photos` array in `src/data/content.ts`.
 6. Rebuild and redeploy the site.
+
+Either way, note that neither option touches a gallery's `photoIds` array —
+if a new photo belongs on a gallery detail page, add its id there by hand.
 
 ## Managing order
 
