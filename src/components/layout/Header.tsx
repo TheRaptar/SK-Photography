@@ -54,11 +54,11 @@ export default function Header() {
             <span className="absolute inset-0 rounded-full bg-accent/30 blur-md transition-transform duration-500 group-hover:scale-125" aria-hidden="true" />
             <img
               src="/logo.png"
-              alt="SK Photography emblem"
+              alt="Superlab Media and Production emblem"
               className="relative w-10 h-10 rounded-full object-cover transition-transform duration-500 group-hover:rotate-6"
             />
           </span>
-          <span className="text-gold-gradient">SK</span>&nbsp;Photography
+          <span className="text-gold-gradient">Superlab</span>&nbsp;Media
         </Link>
 
         <nav className="hidden md:flex items-center gap-10">

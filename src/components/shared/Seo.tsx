@@ -7,7 +7,9 @@ interface SeoProps {
   image?: string;
 }
 
-const SITE_NAME = 'SK Photography';
+const SITE_NAME = 'Superlab Media';
+const LEGAL_NAME = 'Superlab Media and Production Ltd';
+const COMPANY_NUMBER = '17443786';
 const SITE_URL = 'https://www.yourdomain.com';
 
 export default function Seo({ title, description, path = '/', image }: SeoProps) {
@@ -19,11 +21,20 @@ export default function Seo({ title, description, path = '/', image }: SeoProps)
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: SITE_NAME,
+    legalName: LEGAL_NAME,
+    identifier: COMPANY_NUMBER,
     description,
     url: SITE_URL,
     image: ogImage,
     priceRange: '££££',
     areaServed: 'London, United Kingdom',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '31 Guthrum Court, 1 Cavendish Square',
+      addressLocality: 'London',
+      postalCode: 'E16 2XN',
+      addressCountry: 'GB',
+    },
   };
 
   return (

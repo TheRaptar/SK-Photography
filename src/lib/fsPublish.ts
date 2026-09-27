@@ -37,7 +37,7 @@ async function ensurePermission(handle: FileSystemDirectoryHandle): Promise<bool
 
 /** Opens the native folder picker and remembers the chosen folder for next time. */
 export async function chooseProjectRoot(): Promise<FileSystemDirectoryHandle> {
-  const handle = await window.showDirectoryPicker({ id: 'sk-photography-root', mode: 'readwrite' });
+  const handle = await window.showDirectoryPicker({ id: 'superlab-media-root', mode: 'readwrite' });
   // Sanity check: this should look like the project root, not a random folder.
   try {
     await handle.getDirectoryHandle('src');

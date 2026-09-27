@@ -7,8 +7,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-2">
           <Link to="/" className="flex items-center gap-3 font-display text-lg tracking-wide mb-4">
-            <img src="/logo.png" alt="SK Photography emblem" className="w-9 h-9 rounded-full object-cover" />
-            <span className="text-gold-gradient">SK</span>&nbsp;Photography
+            <img src="/logo.png" alt="Superlab Media and Production emblem" className="w-9 h-9 rounded-full object-cover" />
+            <span className="text-gold-gradient">Superlab</span>&nbsp;Media
           </Link>
           <p className="text-sm text-ink-dim max-w-sm leading-relaxed">
             Full-time photography studio based in London, available across the UK —
@@ -49,9 +49,16 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-line">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row gap-3 items-center justify-between text-[11px] tracking-[0.08em] uppercase text-ink-dim">
-          <span>© {new Date().getFullYear()} SK Photography</span>
-          <span>London, United Kingdom</span>
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col gap-3 text-[11px] tracking-[0.05em] uppercase text-ink-dim">
+          <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
+            <span>© {new Date().getFullYear()} Superlab Media and Production Ltd</span>
+            <span>London, United Kingdom</span>
+          </div>
+          <p className="normal-case tracking-normal text-center sm:text-left text-ink-dim/80">
+            Superlab Media and Production Ltd is registered in England and Wales, company no.
+            17443786. Registered office: 31 Guthrum Court, 1 Cavendish Square, London, England,
+            E16 2XN.
+          </p>
         </div>
       </div>
     </footer>

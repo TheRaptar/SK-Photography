@@ -66,15 +66,15 @@
     rx="6"
     fill="url(#gold)"/>
 
-  <!-- SK -->
+  <!-- SM -->
   <text
     x="256"
     y="283"
     text-anchor="middle"
-    font-size="58"
+    font-size="52"
     font-family="Georgia, serif"
     font-weight="700"
     fill="url(#gold)">
-    SK
+    SM
   </text>
 </svg>

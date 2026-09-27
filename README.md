@@ -1,7 +1,8 @@
-# SK Photography Portfolio
+# Superlab Media and Production — Website
 
-A premium, fully responsive photography portfolio site. Pure frontend — no database,
-no backend, no accounts required. Built with React 19 + TypeScript + Vite + Tailwind CSS v4.
+A premium, fully responsive photography portfolio site for Superlab Media
+and Production Ltd. Pure frontend — no database, no backend, no accounts
+required. Built with React 19 + TypeScript + Vite + Tailwind CSS v4.
 
 ## Getting started
 
