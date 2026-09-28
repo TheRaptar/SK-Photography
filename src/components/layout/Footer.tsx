@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="md:col-span-2">
           <Link to="/" className="flex items-center gap-3 font-display text-lg tracking-wide mb-4">
             <img src="/logo.png" alt="Superlab Media and Production emblem" className="w-9 h-9 rounded-full object-cover" />
-            <span className="text-gold-gradient">Superlab</span>&nbsp;Media
+            <span className="text-gradient-accent">Superlab</span>&nbsp;Media
           </Link>
           <p className="text-sm text-ink-dim max-w-sm leading-relaxed">
             Full-time photography studio based in London, available across the UK —

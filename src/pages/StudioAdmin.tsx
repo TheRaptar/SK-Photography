@@ -364,7 +364,7 @@ function ManagerPanel() {
                 type="button"
                 onClick={handleConnectFolder}
                 disabled={connecting}
-                className="btn-gold inline-flex items-center gap-2 text-[12px] tracking-[0.08em] uppercase px-5 py-3 whitespace-nowrap disabled:opacity-50"
+                className="btn-primary inline-flex items-center gap-2 text-[12px] tracking-[0.08em] uppercase px-5 py-3 whitespace-nowrap disabled:opacity-50"
               >
                 {connecting ? <Loader2 size={14} className="animate-spin" /> : <FolderOpen size={14} strokeWidth={1.8} />}
                 {connecting ? 'Waiting for folder…' : 'Connect project folder'}
@@ -389,7 +389,7 @@ function ManagerPanel() {
                 type="button"
                 onClick={handlePublish}
                 disabled={publishing || uploadedPhotos.length === 0}
-                className="btn-gold inline-flex items-center gap-2 text-[12px] tracking-[0.08em] uppercase px-5 py-3 disabled:opacity-40"
+                className="btn-primary inline-flex items-center gap-2 text-[12px] tracking-[0.08em] uppercase px-5 py-3 disabled:opacity-40"
               >
                 {publishing ? <Loader2 size={14} className="animate-spin" /> : <UploadCloud size={14} strokeWidth={1.8} />}
                 {publishing

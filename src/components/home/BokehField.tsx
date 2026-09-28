@@ -3,7 +3,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
 /**
- * A field of drifting, out-of-focus gold light — the kind of bokeh you get
+ * A field of drifting, out-of-focus points of light — the kind of bokeh you get
  * shooting wide open at golden hour. It's the one genuinely 3D moment on
  * the site: real depth-sorted particles in a perspective camera, tilting
  * gently toward the cursor like a lens racking focus.
@@ -22,9 +22,9 @@ function makeSprite() {
   const ctx = canvas.getContext('2d')!;
   const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
   gradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
-  gradient.addColorStop(0.25, 'rgba(243, 220, 160, 0.55)');
-  gradient.addColorStop(0.6, 'rgba(212, 175, 106, 0.18)');
-  gradient.addColorStop(1, 'rgba(212, 175, 106, 0)');
+  gradient.addColorStop(0.25, 'rgba(165, 180, 252, 0.55)');
+  gradient.addColorStop(0.6, 'rgba(99, 102, 241, 0.2)');
+  gradient.addColorStop(1, 'rgba(99, 102, 241, 0)');
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, size, size);
   const texture = new THREE.CanvasTexture(canvas);
@@ -108,7 +108,7 @@ function BokehPoints() {
           opacity={0.8}
           depthWrite={false}
           blending={THREE.AdditiveBlending}
-          color={new THREE.Color('#f0d38a')}
+          color={new THREE.Color('#a5b4fc')}
         />
       </points>
     </group>

@@ -86,7 +86,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/40" />
 
       {/* Three.js bokeh field — the one true 3D moment on the site, layered
-          between the photo and the copy so the gold specks read as drifting
+          between the photo and the copy so the light specks read as drifting
           light in front of the image, not a flat overlay. */}
       {!reduceMotion && (
         <Suspense fallback={null}>
@@ -94,7 +94,7 @@ export default function Hero() {
         </Suspense>
       )}
 
-      {/* Ambient gold glow — pure depth, no meaning, disabled with reduced motion via the animation rule in index.css */}
+      {/* Ambient accent glow — pure depth, no meaning, disabled with reduced motion via the animation rule in index.css */}
       <div className="glow-orb w-[38rem] h-[38rem] -top-32 -right-32 animate-float-slow" aria-hidden="true" />
       <div className="glow-orb w-[26rem] h-[26rem] bottom-0 -left-20 opacity-70 animate-float-slow" style={{ animationDelay: '-6s' }} aria-hidden="true" />
 
@@ -104,7 +104,7 @@ export default function Hero() {
           animate={reduceMotion ? undefined : 'show'}
           variants={fadeUp}
           custom={0}
-          className="eyebrow text-[#e7d9c2] mb-5 inline-flex items-center gap-2.5"
+          className="eyebrow text-[#c7c9fb] mb-5 inline-flex items-center gap-2.5"
         >
           <ApertureMark />
           Full-time photography studio — London &amp; beyond
@@ -119,7 +119,7 @@ export default function Hero() {
               custom={0}
               className="block"
             >
-              Photographs that <span className="text-gold-gradient">hold up</span>
+              Photographs that <span className="text-gradient-accent">hold up</span>
             </motion.span>
           </span>
           <span className="block overflow-hidden">
@@ -156,7 +156,7 @@ export default function Hero() {
           <Magnetic>
             <Link
               to="/portfolio"
-              className="btn-gold inline-flex items-center text-[13px] tracking-[0.08em] uppercase px-7 py-3.5"
+              className="btn-primary inline-flex items-center text-[13px] tracking-[0.08em] uppercase px-7 py-3.5"
             >
               View portfolio
             </Link>

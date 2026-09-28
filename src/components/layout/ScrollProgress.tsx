@@ -1,7 +1,7 @@
 import { motion, useScroll, useSpring } from 'framer-motion';
 
 /**
- * A hairline gold thread across the top of the header that fills with
+ * A hairline accent thread across the top of the header that fills with
  * scroll progress — the kind of quiet, precise detail that reads as
  * "considered" rather than decorative. Pure CSS-transform driven (scaleX),
  * so it costs effectively nothing.

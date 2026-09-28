@@ -47,7 +47,7 @@ export default function ContactForm() {
             name="sessionType"
             required
             defaultValue=""
-            className="w-full bg-transparent border-b border-line-strong py-2.5 text-ink focus:outline-none focus:border-accent transition-colors"
+            className="w-full bg-surface border border-line-strong rounded-lg px-4 py-3 text-ink focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/25 transition-all"
           >
             <option value="" disabled>Select one</option>
             {SESSION_TYPES.map((type) => (
@@ -68,13 +68,13 @@ export default function ContactForm() {
           required
           rows={5}
           placeholder="Venue, headcount, vision, anything that helps me understand the brief…"
-          className="w-full bg-transparent border-b border-line-strong py-2.5 text-ink placeholder:text-ink-dim/70 focus:outline-none focus:border-accent transition-colors resize-none"
+          className="w-full bg-surface border border-line-strong rounded-lg px-4 py-3 text-ink placeholder:text-ink-dim/70 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/25 transition-all resize-none"
         />
       </div>
 
       <button
         type="submit"
-        className="inline-flex items-center gap-2.5 text-[13px] tracking-[0.08em] uppercase bg-ink text-bg px-8 py-4 hover:bg-accent transition-colors"
+        className="btn-primary inline-flex items-center gap-2.5 text-[13px] font-semibold tracking-[0.06em] uppercase px-8 py-4"
       >
         Send inquiry <Send size={14} strokeWidth={1.8} />
       </button>
@@ -110,7 +110,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="w-full bg-transparent border-b border-line-strong py-2.5 text-ink focus:outline-none focus:border-accent transition-colors"
+        className="w-full bg-surface border border-line-strong rounded-lg px-4 py-3 text-ink focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/25 transition-all"
       />
     </div>
   );

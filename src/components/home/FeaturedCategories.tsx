@@ -34,7 +34,7 @@ export default function FeaturedCategories() {
           </Link>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {FEATURED.map((item, i) => {
             const count = galleries.filter((g) => g.category === item.category).length;
             return (
@@ -44,12 +44,12 @@ export default function FeaturedCategories() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="bg-bg"
+                className=""
               >
                 <TiltCard maxTilt={4} className="card-premium">
                   <Link
                     to={`/portfolio?category=${item.category}`}
-                    className="group block relative aspect-[4/5] overflow-hidden"
+                    className="group block relative aspect-[4/5] overflow-hidden rounded-[0.85rem]"
                   >
                     <div className="absolute inset-0 overflow-hidden">
                       <div className="absolute inset-0 ken-burns-idle group-hover:[animation-play-state:paused]">

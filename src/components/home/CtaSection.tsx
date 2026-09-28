@@ -15,7 +15,7 @@ export default function CtaSection() {
         </p>
         <Link
           to="/contact"
-          className="btn-gold mt-10 inline-flex items-center text-[13px] tracking-[0.08em] uppercase px-8 py-4"
+          className="btn-primary mt-10 inline-flex items-center text-[13px] tracking-[0.08em] uppercase px-8 py-4"
         >
           Start an inquiry
         </Link>

@@ -37,7 +37,7 @@ function GalleryTile({ photo, i, onOpen }: { photo: Photo; i: number; onOpen: ()
         <button
           type="button"
           onClick={onOpen}
-          className="group/tile relative block w-full overflow-hidden text-left bg-surface-2"
+          className="group/tile relative block w-full overflow-hidden rounded-xl text-left bg-surface-2"
           style={{ aspectRatio: `${photo.width} / ${photo.height}` }}
           aria-label={`Open ${photo.title} in lightbox`}
         >

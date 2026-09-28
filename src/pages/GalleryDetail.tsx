@@ -85,7 +85,7 @@ export default function GalleryDetail() {
             initial={reduceMotion ? undefined : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.35 }}
-            className="eyebrow text-[#e7d9c2] mb-4"
+            className="eyebrow text-[#c7c9fb] mb-4"
           >
             {CATEGORY_LABELS[gallery.category]}
           </motion.p>
@@ -113,7 +113,7 @@ export default function GalleryDetail() {
           <button
             type="button"
             onClick={handleShare}
-            className="inline-flex items-center gap-2 text-[12px] tracking-[0.06em] uppercase border border-line-strong px-5 py-3 hover:bg-ink hover:text-bg hover:border-ink transition-colors shrink-0 self-start"
+            className="btn-outline inline-flex items-center gap-2 text-[12px] font-medium tracking-[0.06em] uppercase border border-line-strong px-5 py-3 shrink-0 self-start"
           >
             {copied ? <Check size={14} strokeWidth={1.6} /> : <Share2 size={14} strokeWidth={1.6} />}
             {copied ? 'Link copied' : 'Share with client'}

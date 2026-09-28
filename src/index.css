@@ -1,36 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 /* Enables `dark:` variants toggled by a .dark class on <html>, instead of OS preference */
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ---------- Design tokens ---------- */
+/* A modern, structured tech/SaaS system: near-white or near-black neutrals,
+   one confident indigo accent, and a cool (not warm) ink color. Replaces
+   the previous black/gold luxury palette site-wide — every component reads
+   these variables via Tailwind's @theme below, so the whole site recolors
+   from here. */
 :root {
-  --bg: #faf9f6;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --surface-2: #f2f0eb;
-  --ink: #15140f;
-  --ink-dim: #6b6963;
-  --accent: #9c7a4e;
-  --accent-soft: #ddd0bb;
-  --accent-2: #f0d38a;
-  --line: rgba(21, 20, 15, 0.1);
-  --line-strong: rgba(21, 20, 15, 0.18);
-  --gold-glow: rgba(156, 122, 78, 0.35);
+  --surface-2: #f3f4f7;
+  --ink: #10121c;
+  --ink-dim: #5c6270;
+  --accent: #4f46e5;
+  --accent-soft: #e7e5fb;
+  --accent-2: #6366f1;
+  --line: rgba(16, 18, 28, 0.09);
+  --line-strong: rgba(16, 18, 28, 0.16);
+  --accent-glow: rgba(79, 70, 229, 0.28);
 }
 
 .dark {
-  --bg: #08080a;
-  --surface: #121014;
-  --surface-2: #19171b;
-  --ink: #f6f3ec;
-  --ink-dim: #a19c8f;
-  --accent: #d4af6a;
-  --accent-soft: #4a3d2a;
-  --accent-2: #f3dca0;
-  --line: rgba(244, 242, 236, 0.1);
-  --line-strong: rgba(244, 242, 236, 0.2);
-  --gold-glow: rgba(212, 175, 106, 0.28);
+  --bg: #05060b;
+  --surface: #0d0f18;
+  --surface-2: #12141f;
+  --ink: #f2f3f8;
+  --ink-dim: #9b9fb0;
+  --accent: #818cf8;
+  --accent-soft: #232244;
+  --accent-2: #a5b4fc;
+  --line: rgba(242, 243, 248, 0.1);
+  --line-strong: rgba(242, 243, 248, 0.18);
+  --accent-glow: rgba(129, 140, 248, 0.32);
 }
 
 @theme inline {
@@ -45,8 +50,8 @@
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
 
-  --font-display: 'Fraunces', ui-serif, serif;
-  --font-body: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ---------- Base ---------- */
@@ -69,7 +74,7 @@ img {
 
 ::selection {
   background: var(--accent);
-  color: var(--bg);
+  color: #fff;
 }
 
 :focus-visible {
@@ -95,14 +100,15 @@ img {
 .eyebrow {
   font-family: var(--font-body);
   font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
 }
 
 .font-display {
   font-family: var(--font-display);
+  letter-spacing: -0.01em;
 }
 
 .hairline {
@@ -122,68 +128,74 @@ img {
   border-radius: 999px;
 }
 
-/* ---------- Premium gold accents ---------- */
+/* ---------- Structured accent system ---------- */
 
-/* Gradient gold text — headlines, logo wordmark, prices */
-.text-gold-gradient {
-  background: linear-gradient(115deg, var(--accent-soft) 0%, var(--accent-2) 35%, var(--accent) 65%, var(--accent-2) 100%);
+/* Gradient accent text — headlines, logo wordmark, prices */
+.text-gradient-accent {
+  background: linear-gradient(115deg, var(--accent-2) 0%, var(--accent) 50%, var(--accent-2) 100%);
   background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: gold-sheen 7s ease-in-out infinite;
+  animation: accent-sheen 7s ease-in-out infinite;
 }
 
-@keyframes gold-sheen {
+@keyframes accent-sheen {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
 
-/* Primary CTA — solid gold gradient with a light sweep on hover */
-.btn-gold {
+/* Primary CTA — solid indigo, flat and structured with a light sweep on hover */
+.btn-primary {
   position: relative;
   overflow: hidden;
+  border-radius: 0.6rem;
   background: linear-gradient(135deg, var(--accent-2), var(--accent));
-  color: #15120c;
+  color: #ffffff;
   isolation: isolate;
-  box-shadow: 0 8px 30px -10px var(--gold-glow);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  box-shadow: 0 8px 24px -10px var(--accent-glow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.btn-gold::before {
+.btn-primary::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.55) 50%, transparent 80%);
+  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.35) 50%, transparent 80%);
   transform: translateX(-120%);
   transition: transform 0.7s ease;
   z-index: 1;
 }
-.btn-gold:hover::before {
+.btn-primary:hover::before {
   transform: translateX(120%);
 }
-.btn-gold:hover {
+.btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 40px -8px var(--gold-glow);
+  box-shadow: 0 14px 32px -8px var(--accent-glow);
 }
 
-/* Secondary / outline CTA with a gold-glow border on hover */
-.btn-outline-gold {
+/* Secondary / outline CTA — structured border, fills with accent-soft on hover */
+.btn-outline {
   position: relative;
-  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+  border-radius: 0.6rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
 }
-.btn-outline-gold:hover {
+.btn-outline:hover {
   border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent), 0 10px 30px -12px var(--gold-glow);
+  background-color: var(--accent-soft);
+  box-shadow: 0 8px 20px -12px var(--accent-glow);
   transform: translateY(-2px);
 }
 
-/* Elevated card with a soft gold glow ring on hover — pairs with TiltCard */
+/* Elevated card — resting shadow for structure, deepens with an accent tint on hover */
 .card-premium {
   position: relative;
-  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+  border-radius: 0.85rem;
+  box-shadow: 0 1px 2px rgba(16, 18, 28, 0.04), 0 1px 0 var(--line);
+  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
 }
 .card-premium:hover {
-  box-shadow: 0 20px 60px -20px var(--gold-glow), 0 0 0 1px var(--line-strong);
+  box-shadow: 0 20px 48px -20px var(--accent-glow), 0 0 0 1px var(--line-strong);
+  transform: translateY(-2px);
 }
 
 /* A quiet, continuous drift on resting photo tiles — the frame never
@@ -204,12 +216,12 @@ img {
   }
 }
 
-/* Soft blurred gold orbs used as ambient background depth */
+/* Soft blurred accent orbs used as ambient background depth */
 .glow-orb {
   position: absolute;
   border-radius: 999px;
   filter: blur(80px);
-  background: radial-gradient(circle, var(--gold-glow), transparent 70%);
+  background: radial-gradient(circle, var(--accent-glow), transparent 70%);
   pointer-events: none;
 }
 
@@ -222,7 +234,7 @@ img {
 }
 
 /* Fine hairline shimmer used under headings / dividers */
-.divider-gold {
+.divider-accent {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
   opacity: 0.6;

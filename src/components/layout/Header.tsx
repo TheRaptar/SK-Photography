@@ -58,7 +58,7 @@ export default function Header() {
               className="relative w-10 h-10 rounded-full object-cover transition-transform duration-500 group-hover:rotate-6"
             />
           </span>
-          <span className="text-gold-gradient">Superlab</span>&nbsp;Media
+          <span className="text-gradient-accent">Superlab</span>&nbsp;Media
         </Link>
 
         <nav className="hidden md:flex items-center gap-10">
@@ -97,7 +97,7 @@ export default function Header() {
 
           <Link
             to="/contact"
-            className="btn-outline-gold hidden sm:inline-flex items-center text-[13px] tracking-[0.08em] uppercase border border-line-strong px-5 py-2.5 hover:bg-ink hover:text-bg transition-colors"
+            className="btn-outline hidden sm:inline-flex items-center text-[13px] tracking-[0.08em] uppercase border border-line-strong px-5 py-2.5"
           >
             Book a session
           </Link>

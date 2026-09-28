@@ -30,7 +30,7 @@ export default function FilterBar({ active, onChange, search, onSearchChange }: 
               type="button"
               onClick={() => onChange(cat)}
               aria-pressed={active === cat}
-              className={`relative text-[12px] tracking-[0.06em] uppercase px-4 py-2 border transition-colors ${
+              className={`relative text-[12px] font-medium tracking-[0.06em] uppercase px-4 py-2 border rounded-full transition-colors ${
                 active === cat ? 'text-bg border-ink' : 'border-line text-ink-dim hover:text-ink hover:border-line-strong'
               }`}
             >
@@ -38,7 +38,7 @@ export default function FilterBar({ active, onChange, search, onSearchChange }: 
                 <motion.span
                   layoutId="filter-pill"
                   transition={{ type: 'spring', stiffness: 420, damping: 34 }}
-                  className="absolute inset-0 bg-ink"
+                  className="absolute inset-0 bg-ink rounded-full"
                 />
               )}
               <span className="relative">{cat === 'all' ? 'All work' : CATEGORY_LABELS[cat]}</span>
@@ -54,7 +54,7 @@ export default function FilterBar({ active, onChange, search, onSearchChange }: 
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search galleries…"
             aria-label="Search galleries"
-            className="w-full bg-surface border border-line pl-9 pr-3 py-2.5 text-sm placeholder:text-ink-dim focus:outline-none focus:border-accent transition-colors"
+            className="w-full bg-surface border border-line-strong rounded-full pl-9 pr-4 py-2.5 text-sm placeholder:text-ink-dim focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/25 transition-all"
           />
         </div>
       </div>
